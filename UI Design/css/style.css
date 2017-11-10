@@ -1,0 +1,56 @@
+.home-signup-linkedin{
+    color: white;
+    background: #0084bf;
+    padding: 5vh;
+    font-size: 20vh;
+    margin-top: 10vh;
+    border-radius: 10%;
+}
+
+.home-signup-button{
+    color: white;
+    background: #0084bf;
+    font-size:15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0;
+    margin-top: 5vh;
+}
+
+.right-border{
+    border-right: 1px solid #fff; 
+    margin-top: 3vh;
+}
+
+.height-80vh{
+    min-height: 80vh;
+}
+
+.home-bg{
+    background: linear-gradient(0deg,rgba(0,0,0, 0.6),rgba(0,0,0,0.6)),url("../assets/images/home_bg.jpg") no-repeat;
+    background-size: cover;
+    height: 90vh;
+}
+
+.nav-height{
+    height:10vh;
+    margin-bottom: 0;
+    padding-top: 2vh;
+    opacity: 0.4;
+    color: #fff;
+}
+
+.nav>li>a{
+    /* color: #fff!important; */
+    opacity: 1;
+}
+
+.home-form{
+    color: white;
+    font-size:15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0;
+    margin-top: 10vh;
+    padding: 5vh;
+}
