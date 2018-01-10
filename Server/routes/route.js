@@ -30,4 +30,8 @@ route.get('/auth/google/profile',auth.profile);
 route.get('/auth/facebook/profile',auth.profile);
 route.get('/auth/linkedin/profile',auth.profile);
 
+route.get('/profile/updatedetails',(req,res)=>{
+    res.send("Hellooooo ");
+});
+
 module.exports = route;

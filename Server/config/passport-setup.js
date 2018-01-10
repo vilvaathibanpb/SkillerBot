@@ -30,7 +30,7 @@ passport.use(
         (accessToken, refreshToken, profile, done) => {
             userProfile.findOne({ email_id: profile.emails[0].value }).then((currentUser) => {
                 if (currentUser) {
-                    done(null, profile);
+                    done(null, currentUser);
                 }
                 else {
                     new userProfile({
@@ -61,7 +61,7 @@ passport.use(
             console.log("**********Authentication");
             userProfile.findOne({ email_id: profile.emails[0].value }).then((currentUser) => {
                 if (currentUser) {
-                    done(null, profile);
+                    done(null, currentUser);
                 }
                 else {
                     new userProfile({

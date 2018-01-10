@@ -67,6 +67,11 @@ body{
     min-height: 100vh;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
+@media (max-width: 768px){
+    .section{
+        width: 100%;
+    }
+}
 .signup{}
 .signup:hover{
     background: #22A8C8;

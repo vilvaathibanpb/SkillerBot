@@ -92,7 +92,6 @@ var validate = function() {
 
     var roleIndex = selectList.selectedIndex;
     var roleString = "";
-
     if (parseInt(roleIndex) > 0) {
         roleString = selectList.options[selectList.selectedIndex].text;
     }
