@@ -9,7 +9,8 @@ var userProfileSchema = new Schema(
         image_path : String,
         account_status : Boolean,
         url_code : String,
-        role : String
+        role : String,
+        profile_url : String
     }
 );
 

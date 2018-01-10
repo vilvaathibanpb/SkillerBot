@@ -55,23 +55,50 @@ var mouseOutCustomise = function(){
 
 var shrinkMenu = function(){
     console.log("shrink")
-    // document.getElementById("contactUsImg").classList.add("display-none");  
-    document.getElementById("overlay2").classList.remove("display-none");    
-    document.getElementById("customize").classList.add("customize-bg");    
-    setTimeout(function(){document.getElementById("line2").classList.add("display-none");},250);  
+    // document.getElementById("contactUsImg").classList.add("display-none"); 
+    if (document.getElementById("overlay2")) 
+        document.getElementById("overlay2").classList.remove("display-none");  
+    if (document.getElementById("customize"))  
+        document.getElementById("customize").classList.add("customize-bg");    
+    setTimeout(function(){document.getElementById("line2").classList.add("display-none");},250);
+    return;  
       
 }
 
 var expandMenu = function(){
     document.getElementById("line2").classList.remove("display-none");
-    document.getElementById("customize").classList.remove("customize-bg");        
-    document.getElementById("line2").classList.add("expand-span");
+    if (document.getElementById("customize"))
+        document.getElementById("customize").classList.remove("customize-bg");   
+    if (document.getElementById("line2"))     
+        document.getElementById("line2").classList.add("expand-span");
+    return;
 }
 
 var openMenu = function(){
-    document.getElementById("menu").classList.remove("display-none");    
+    if (document.getElementById("menu"))
+        document.getElementById("menu").classList.remove("display-none");    
+    return;
 }
 
 var closeMenu = function(){
-    document.getElementById("menu").classList.add("display-none");    
+    if (document.getElementById("menu"))
+        document.getElementById("menu").classList.add("display-none");    
+    return;
+}
+
+var validate = function() {
+
+    var selectList = document.getElementById("role");
+
+    var roleIndex = selectList.selectedIndex;
+    var roleString = "";
+
+    if (parseInt(roleIndex) > 0) {
+        roleString = selectList.options[selectList.selectedIndex].text;
+    }
+    else {
+        alert("Please Select the Role");
+        selectList.focus();
+        return false;
+    }
 }

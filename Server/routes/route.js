@@ -3,30 +3,31 @@ const route = express.Router();
 const auth = require("../controller/auth");
 const login = require("../controller/login");
 const passport = require("passport");
+const userProfile = require('../models/user-model');
 
-
-route.get('/',(req,res)=>{
+route.get('/', (req, res) => {
     res.render("../view/index");
 });
 
 //Scope APIs
-route.get('/auth/facebook',auth.fbAuth);
-route.get('/auth/google',auth.googleplusScope);
-route.get('/auth/linkedin',auth.linkedinScope);
+route.get('/auth/facebook', auth.facebookScope);
+route.get('/auth/google', auth.googleplusScope);
+route.get('/auth/linkedin', auth.linkedinScope);
 
-//Authentication APIs
-route.get('/auth/facebook/redirect',auth.fbAuth);
+//Facebook Profile Authentication
+route.get('/auth/facebook/redirect', passport.authenticate('facebook'),auth.facebookAuth);
 
-//Need to check
-route.get('/auth/google/redirect',passport.authenticate('google'),(req,res)=>{
-    res.send("We hve reached the google callback");
-});
+//Google Profile Authentication
+route.get('/auth/google/redirect', passport.authenticate('google'), auth.googleplusAuth);
 
-route.get('/auth/linkedin/redirect',passport.authenticate('linkedin'),(req,res)=>{
-    res.send("We hve reached the linkedin callback");
-});
+//LinkedIn Profile Authentication
+route.get('/auth/linkedin/redirect', passport.authenticate('linkedin'), auth.linkedInAuth);
 
+//Login Page
+route.get('/signup', login.loginPage);
 
-route.get('/signup',login.loginPage);
+route.get('/auth/google/profile',auth.profile);
+route.get('/auth/facebook/profile',auth.profile);
+route.get('/auth/linkedin/profile',auth.profile);
 
-module.exports = route ;
+module.exports = route;
