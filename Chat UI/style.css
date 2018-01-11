@@ -145,7 +145,11 @@ body{
     .chatbox{
         width: 100%;
     }
-
+    .msgbox{
+        margin-left: 20px;
+        padding-left: 10px;
+        width: calc(100% - 140px);
+    }
     .type-area{
         left: 0;
         width: 100%;
