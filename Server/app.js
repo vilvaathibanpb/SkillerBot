@@ -15,6 +15,7 @@ app.use(express.static(__dirname + '/public'));
 
 //Initialize passport
 app.use(passport.initialize());
+app.use(passport.session());
 
 //Connect to DB
 mongoose.connect(keys.mongodb.dbURL);
@@ -25,7 +26,7 @@ mongoose.connection.on('connected',() => {
 });
 
 //connect to router
-app.use('/api',route);
+app.use('/',route);
 
 app.listen(3000,()=>{
     console.log(__dirname);

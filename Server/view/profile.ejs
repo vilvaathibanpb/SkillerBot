@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SkillerBot | Profile</title>
+        <!-- CSS -->
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/libs/animate.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+        <!-- JS -->
+        <script src="/js/main.js" type="text/javascript"></script>
+    </head>
+
+    <body class="profile-body">
+
+        <div class="header">
+            <!-- <h3 class="logo"></h3> -->
+            <img src="/assets/img/SkillerBot_Logo.png" alt="Skiller Bot" class="logo" />
+            <div class="hamburger" id="menuButton1" onmouseover="shrinkMenu()" onmouseout="expandMenu()" onclick="openMenu();">
+                <span id="line1"></span>
+                <span id="line2" class=""></span>
+                <span id="line3"></span>
+            </div>
+        </div>
+        
+        <div class="app-overview">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tempor, diam sed imperdiet tincidunt.
+        </div>
+
+        <div class="align-center">
+            <img class="profile-dp" src="<%= profileImage %>" alt="Image icon"/>
+        </div>
+
+        <div>
+            <h1 class="profile-name"><%= userName  %></h1>
+        </div>
+
+        <form action="/profile/updatedetails?id=sat" onsubmit="return validate()" method="get">
+
+            <div class="select-option">
+                <select class="select-role" id="role">
+                    <option value="">Please Select your role</option>
+                    <option value="Fresher">Fresher</option>
+                    <option value="FE-developer">Front-End developer</option>
+                </select>
+            </div>
+
+            <div class="align-center">
+                <button class="profile-page-submit">Proceed</button>
+            </div>
+        </form>
+
+        <section id="menu" class="menu-section margin-top-10vh display-none">
+            <h1 class="menu-close" onclick="closeMenu()">X</h1>
+            <a href="http://localhost:3000/signup"><h3 class="font-40 animated fadeInUp">Login</h3></a>
+            <h3 class="font-40 animated fadeInUp"></h3>
+            <h3 class="font-40 animated fadeInUp">About US</h3>
+            <h3 class="font-40 animated fadeInUp">About US</h3>
+        </section>
+
+    </body>
+</html>

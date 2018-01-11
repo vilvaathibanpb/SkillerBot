@@ -67,6 +67,11 @@ body{
     min-height: 100vh;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
+@media (max-width: 768px){
+    .section{
+        width: 100%;
+    }
+}
 .signup{}
 .signup:hover{
     background: #22A8C8;
@@ -455,4 +460,69 @@ body{
 
 #btn-ln {
     background-color: #0077B5;
+}
+
+/* Profile Page  */
+
+.profile-body{
+background-color:#ADDFEC;
+}
+.app-overview{
+position:relative;
+    text-align: center;
+    background-color: #00B2FF;
+    border: #fff 1px solid;
+    border-radius: 10px;
+    height: auto;
+    width: 48%;
+    padding: 15px;
+    color: #fff;
+    margin: 10% 24% 2% 24%;
+}
+.align-center{
+text-align:center;
+}
+.profile-dp{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 105px;
+    width:auto;
+    border:#000 1px solid;
+    border-radius:50%;
+    margin: 1% 43% 2% 43%;
+}
+
+.profile-name{
+margin:auto;
+text-align:center;
+}
+
+.select-option{
+text-align:center;
+}
+
+.role-header{
+font-size:25px;
+}
+
+.select-role{
+margin-top:35px;
+height:25px;
+border:#000 1px solid;
+text-shadow: 0px 0px 0px black;
+}
+
+.profile-page-submit{
+margin-top:35px;
+font-size:25px;
+background-color:#00B2FF;
+border:#000 1px solid;
+border-radius:5px;
+outline:none;
+}
+
+.profile-page-submit:hover{
+cursor:pointer;
 }

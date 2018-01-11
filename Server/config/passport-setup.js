@@ -22,7 +22,7 @@ passport.deserializeUser(
 
 passport.use(
     new LinkedInStrategy({
-        callbackURL: '/api/auth/linkedin/redirect',
+        callbackURL: '/auth/linkedin/redirect',
         clientID: keys.linkedIn.clientID,
         clientSecret: keys.linkedIn.clientSecret,
         scope: ['r_basicprofile', 'r_emailaddress']
@@ -30,8 +30,7 @@ passport.use(
         (accessToken, refreshToken, profile, done) => {
             userProfile.findOne({ email_id: profile.emails[0].value }).then((currentUser) => {
                 if (currentUser) {
-                    console.log("UserAlreadyExists");
-                    done(null, profile);
+                    done(null, currentUser);
                 }
                 else {
                     new userProfile({
@@ -39,7 +38,8 @@ passport.use(
                         email_id: profile.emails[0].value,
                         //mobile : String,
                         image_path: profile.photos[0].value,
-                        // account_status: false,
+                        account_status: false,
+                        profile_url: profile._json.url
                         // url_code : String,
                         // role : String
 
@@ -53,12 +53,30 @@ passport.use(
 
 passport.use(
     new GoogleStrategy({
-        callbackURL: '/api/auth/google/redirect',
+        callbackURL: '/auth/google/redirect',
         clientID: keys.google.clientID,
         clientSecret: keys.google.clientSecret
     },
         (accessToken, refreshToken, profile, done) => {
-            console.log("google profile");
-            done(null, profile);
-        })
-);
+            console.log("**********Authentication");
+            userProfile.findOne({ email_id: profile.emails[0].value }).then((currentUser) => {
+                if (currentUser) {
+                    done(null, currentUser);
+                }
+                else {
+                    new userProfile({
+                        user_name: profile.displayName,
+                        email_id: profile.emails[0].value,
+                        //mobile : String,
+                        image_path: profile.photos[0].value,
+                        account_status: false,
+                        // url_code : String,
+                        // role : String
+                        profile_url: profile._json.url
+
+                    }).save().then((newUser) => {
+                        done(null, newUser);
+                    });
+                }
+            });
+        }));
