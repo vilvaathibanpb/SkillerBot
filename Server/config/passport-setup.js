@@ -71,7 +71,7 @@ passport.use(
                         image_path: profile.photos[0].value,
                         account_status: false,
                         // url_code : String,
-                        // role : String
+                        role : "undefined",
                         profile_url: profile._json.url
 
                     }).save().then((newUser) => {

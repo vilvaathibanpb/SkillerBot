@@ -30,8 +30,15 @@ route.get('/auth/google/profile',auth.profile);
 route.get('/auth/facebook/profile',auth.profile);
 route.get('/auth/linkedin/profile',auth.profile);
 
-route.get('/profile/updatedetails',(req,res)=>{
-    res.send("Hellooooo ");
+route.post('/profile/updatedetails',(req,res)=>{
+    userProfile.findOneAndUpdate({'_id': req.query.id},{'role':req.body.selectRole},(err,data)=>{
+        if (!err){
+            res.send(req.body.selectRole);
+        }
+        else{
+            res.send("err");
+        }
+    });
 });
 
 module.exports = route;

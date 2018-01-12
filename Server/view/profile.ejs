@@ -34,13 +34,12 @@
             <h1 class="profile-name"><%= userName  %></h1>
         </div>
 
-        <form action="/profile/updatedetails?id=sat" onsubmit="return validate()" method="get">
-
+        <form action="/profile/updatedetails?id=<%= userid  %>" onsubmit="return validate()" method="post">
             <div class="select-option">
-                <select class="select-role" id="role">
+                <select class="select-role" id="role" name="selectRole">
                     <option value="">Please Select your role</option>
                     <option value="Fresher">Fresher</option>
-                    <option value="FE-developer">Front-End developer</option>
+                    <option value="Front-End developer">Front-End developer</option>
                 </select>
             </div>
 
