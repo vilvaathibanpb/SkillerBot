@@ -6,19 +6,17 @@
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css
         ">
-        <script src="main.js"></script>
     </head>
     <body>
+
         <div class="header">
             <h1 style="margin-bottom: 0px; font-size: 22px; text-align:center;">Vilva Athiban P B - Resume/CV Bot</h1>
             <h3 style="margin-top: 5px; font-size: 14px; text-align:center;">Senior Front-End Developer</h3>
         </div>
-        <div class="type-area">
-            <input type="text" class="msgbox" placeholder="Write your message here..." />
-            <button class="send-btn">Send</button>
-        </div>
+        
         <div class="container">
-                <div class="placeholder-details display-none"></div>
+            <div class="placeholder-details display-none"></div>
+
             <div class="details display-none">
                 <img src="photo.jpg" class="profile-img" />
                 <h1 style="font-size:18px; font-weight:400; margin-top: 50px;"> Vilva Athiban P B </h1>
@@ -26,11 +24,10 @@
                 <h1 style="font-size:16px; font-weight:400;"> VilvaAthiban@gmail.com</h1>
                 <h1 style="font-size:14px; font-weight:400; word-wrap:break-word; padding: 5px 50px"> Summary: djkfbvdjbvjdnvjksdnjksdvnjsdvnjsdvndvndjsvnsjdnvkjsdnvjdsnvjsnvjskvnsv </h1>
                 <h1 style="font-size:18px; font-weight:400;"> <i class="fa fa-linkedin"></i> <i class="fa fa-google-plus"></i> <i class="fa fa-facebook"></i> <i class="fa fa-github"></i></h1>
-
-                
             </div>
-            <div class="chatbox">
-                <div>
+
+            <div class="chatbox" id="chatbox">
+                <div id="msgarea">
                     <div style="background: #fff; display:flex; ">
                             <img src="photo.jpg" class="mini-dp" />
                             <h4 class="chat-bubble bot" style="font-weight: 400;"> djkfbvdjbvjdnvjksdnjksdvnjsdvnjsdvndvndjsvnsjdnvkjsdnvjdsnvjsnvjskvnsv </h4>
@@ -53,11 +50,20 @@
                             <h4 class="chat-bubble hr" style="font-weight: 400;"> djkfbvdjbvjdnvjksdnjksdvnjsdvnjsdvndvndjsvnsjdnvkjsdnvjdsnvjsnvjskvnsv </h4>
                     </div>
                 </div>
-                <div style="background: #fff; display:flex; ">
+                <div style="background: #fff; display:flex; " id="typing">
                         <img src="photo.jpg" class="mini-dp" />
                         <img src="typing.gif" class="mini-dp" />
                 </div>
             </div>
+
         </div>
+
+        <div class="type-area">
+            <input type="text" id="input" class="msgbox" placeholder="Write your message here..." />
+            <button class="send-btn" onclick="addHrMsg()">Send</button>
+        </div>
+
+        <script src="main.js"></script>
+
     </body>
 </html>
