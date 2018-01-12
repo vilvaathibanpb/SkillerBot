@@ -17,10 +17,9 @@
 
 <body>
     <div class="header">
-        <!-- <h3 class="logo"></h3> -->
         <img src="/assets/img/SkillerBot_Logo.png" alt="Skiller Bot" class="logo" />
         <div class="hamburger" id="menuButton" onmouseover="shrinkMenu()" onmouseout="expandMenu()" onclick="openMenu();">
-            <span id="line1"></span>
+            <span id="line1" ></span>
             <span id="line2" class=""></span>
             <span id="line3"></span>
         </div>
@@ -30,29 +29,31 @@
         <section class="section signup" onmouseover="mouseOverSignUp()" onmouseout="mouseOutSignUp()">
             <div class="width-75 signup-content">
                 <h2 class="font-40">Make your Resume/CV more Interactive</h2>
+                <br />
                 <h4 class="font-18 font-wt-400">A Bot acting as a Resume/CV is a one stop solution for 24*7 availability, peculiarity and attract Recruiters</h4>
                 <h4 class="font-18 font-wt-400">Never miss a Recruiter's call - Signup to build your Bot.</h4>
                 <br />
+                <br />
                 <div class="flex">
                     <a href="http://localhost:3000/auth/facebook">
-                        <div class="social" id="facebook">
+                        <div class="social fb-m" id="facebook">
                             <i class="fa fa-facebook" ></i>
                         </div>
                     </a>
                     <a href="http://localhost:3000/auth/google">
-                        <div class="social" id="google">
+                        <div class="social gg-m" id="google">
                             <i class="fa fa-google-plus"></i>
                         </div>
                     </a>
                     <a href="http://localhost:3000/auth/linkedin">
-                        <div class="social" id="linkedin">
+                        <div class="social ln-m" id="linkedin">
                             <i class="fa fa-linkedin"></i>
                         </div>
                     </a>
                 </div>
             </div>
-            <div class="overlay-div1 display-none" id="overlay1"></div>
-            <img src="/assets/img/robot.png" class="signup-bg-img display-none" id="signupImg"/>
+            <div class="overlay-div1 display-none m-display-none" id="overlay1"></div>
+            <img src="/assets/img/robot.png" class="signup-bg-img display-none m-display-none" id="signupImg"/>
         </section>
 
         <section class="section description" onmouseover="mouseOverDescription()">
@@ -66,8 +67,8 @@
                 <p class="font-18 "><i class="fa fa-pencil enroll-steps"></i> Signup with SkillerBot</p>           
                 <p class="font-18 "><i class="fa fa-thumbs-o-up enroll-steps"></i> Signup with SkillerBot</p>           
             </div>
-            <div class="overlay-div2 display-none" id="overlay2"></div>            
-            <img src="/assets/img/desc.png" class="desc-bg-img display-none" id="descImg"/>   
+            <div class="overlay-div2 display-none m-display-none" id="overlay2"></div>            
+            <img src="/assets/img/desc.png" class="desc-bg-img display-none m-display-none" id="descImg"/>   
         </section>
 
         <section class="section customize" id="customize" onmouseover="mouseOverCustomise()" onmouseout="mouseOutCustomise()">
@@ -81,8 +82,8 @@
                     <button type="submit" class="submit-btn">Submit</button>
                 </form>
             </div>
-            <div class="overlay-div3 display-none" id="overlay3"></div>            
-            <img src="/assets/img/contact_intro.png" class="contact-bg-img display-none" id="contactUsImg"/>            
+            <div class="overlay-div3 display-none m-display-none"  id="overlay3"></div>            
+            <img src="/assets/img/contact_intro.png" class="contact-bg-img display-none m-display-none" id="contactUsImg"/>            
         </section>
 
         <section id="menu" class="menu-section margin-top-10vh display-none">
