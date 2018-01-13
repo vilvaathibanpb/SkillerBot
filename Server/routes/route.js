@@ -36,7 +36,7 @@ route.get('/auth/google/profile',auth.profile);
 route.get('/auth/facebook/profile',auth.profile);
 route.get('/auth/linkedin/profile',auth.profile);
 
-route.post('/profile/updatedetails',(req,res)=>{
+route.get('/profile/updatedetails',(req,res)=>{
     // fresherQuestion.find((err,data)=>{
     //     if (!err){
     //         // res.render("../view/questionnaire",{
@@ -51,10 +51,10 @@ route.post('/profile/updatedetails',(req,res)=>{
     //     }
     // });
 
-    fresherQuestion.find({}, function(err, docs) {
+    fresherQuestion.findOne({}, function(err, docs) {
         if (!err){
-            console.log(docs.questions_Array[0].UserName);
-            res.send(docs);
+            console.log(docs.questions_Array[0]);
+            res.send(docs.questions_Array[0]);
         }
   });
 });
