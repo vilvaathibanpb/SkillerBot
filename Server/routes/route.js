@@ -4,6 +4,7 @@ const auth = require("../controller/auth");
 const login = require("../controller/login");
 const passport = require("passport");
 const userProfile = require('../models/user-model');
+const fresherQuestion = require('../models/fresher-Questions');
 
 route.get('/', (req, res) => {
     res.render("../view/index");
@@ -31,14 +32,26 @@ route.get('/auth/facebook/profile',auth.profile);
 route.get('/auth/linkedin/profile',auth.profile);
 
 route.post('/profile/updatedetails',(req,res)=>{
-    userProfile.findOneAndUpdate({'_id': req.query.id},{'role':req.body.selectRole},(err,data)=>{
+    // fresherQuestion.find((err,data)=>{
+    //     if (!err){
+    //         // res.render("../view/questionnaire",{
+    //         //     questions : questions
+    //         // });
+    //         res.send("Hiiii");
+    //         console.log(")))))))))))))))))))))))))))))))))");
+    //         console.log(data);
+    //     }
+    //     else{
+    //         res.send("err");
+    //     }
+    // });
+
+    fresherQuestion.find({}, function(err, docs) {
         if (!err){
-            res.send(req.body.selectRole);
+            console.log(docs.questions_Array[0].UserName);
+            res.send(docs);
         }
-        else{
-            res.send("err");
-        }
-    });
+  });
 });
 
 module.exports = route;
