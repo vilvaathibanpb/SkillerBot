@@ -3,7 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width">        
-    <title>SkillerBot | Home</title>
+    <title>SkillerBot | Questionnaire</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/style.css" />
@@ -27,20 +27,24 @@
         </div>
     </div>
 
-    <form class="questionnaireSection" action="#" onsubmit="return saveUserData()" method="get" >
+    <form class="questionnaireSection" action="/profile/Accounts?id=<%= userid  %>" onsubmit="return saveUserData()" method="post" >
         <div class="userInputLabel"> <% questions.forEach(function(question){%>
             <%=question %><br></div>
-            <input type="text" class="userInputDetails" placeholder="Your Name ..." required><br>
+            
+            <input type="text" name="userResponse" class="userInputDetails" placeholder="Please Enter here ..." required><br>
         <% }); %>
+            <div>
+                <button class="questionnaireSubmit">Submit</button> 
+            </div>
     </form>
 
-        <!-- <section id="menu" class="menu-section margin-top-10vh display-none">
+         <section id="menu" class="menu-section margin-top-10vh display-none">
             <h1 class="menu-close" onclick="closeMenu()">X</h1>
             <a href="http://localhost:3000/signup"><h3 class="font-40 animated fadeInUp">Login</h3></a>
             <h3 class="font-40 animated fadeInUp"></h3>
             <h3 class="font-40 animated fadeInUp">About US</h3>
             <h3 class="font-40 animated fadeInUp">About US</h3>
-        </section> -->
+        </section> 
 
 </body>
 

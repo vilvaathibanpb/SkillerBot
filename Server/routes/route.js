@@ -46,6 +46,7 @@ route.post('/profile/updatedetails', (req, res) => {
     });
 
     var questions = [];
+    var userid;
 
     var intentCollection = "";
 
@@ -65,14 +66,77 @@ route.post('/profile/updatedetails', (req, res) => {
                     questions.push(docs.questions_Array[0][key_val]);
                 }
                 res.render("../view/questionnaire", {
-                    questions: questions
+                    questions: questions,
+                    userid: req.query.id
                 });
             }
-            else{
+            else {
                 res.send("Data not present in database");
             }
         });
     }
+});
+
+
+route.post('/profile/Accounts', (req, res) => {
+    var userRole = "";
+    var intentCollection = "";
+    var finalArray = [];
+
+    userProfile.findOne({ '_id': req.query.id }, (err, user) => {
+        if (!err) {
+            userRole = user.role;
+            switch (userRole) {
+                case "Fresher":
+                    intentCollection = fresherQuestion;
+                    break;
+                case "Front-End developer":
+                    break;
+                default:
+                    break;
+            }
+
+            if (intentCollection.length > 0) {
+                intentCollection.findOne({}, function (err, docs) {
+                    if (!err) {
+                        var counter = 0 ;
+                        //Array of response from user from Questionnaire page
+                        var userResponse = req.body.userResponse;
+                        for (var key_val in docs.questions_Array[0]) {
+                            finalArray[key_val] = userResponse[counter];
+                            counter = counter + 1 ;
+                        }
+                        console.log(finalArray);
+                        fresherProfile.findOne({ user_id: req.query.id }).then((currentUser) => {
+                            if (currentUser) {
+                                currentUser.questions_Array.push(finalArray);
+                                currentUser.save();
+                                console.log("******",currentUser.questions_Array);
+                            }
+                            else {
+                                new fresherProfile({
+                                    user_id: req.query.id,
+                                    questions_Array: finalArray
+                                }).save();
+                                console.log("******",finalArray);
+                            }
+
+                            userProfile.findOneAndUpdate({ '_id': req.query.id }, { 'account_status': true }, (err, doc) => {
+                                if (err) {
+                                    res.send("Not able to update the database");
+                                }
+                            });
+
+                        });
+                        res.send("Success");
+                    }
+                    else {
+                        res.send("Data not present in database");
+                    }
+                });
+            }
+        }
+    });
 });
 
 module.exports = route;

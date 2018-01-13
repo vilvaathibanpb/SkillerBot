@@ -632,14 +632,34 @@ cursor:pointer;
 }
 
 .userInputDetails{
-    width: 70%;
-    height: 25px;
-
+    width: 55%;
+    height: 36px;
+    border: #000 1px solid;
+    border-radius: 5px;
+    margin-bottom: 16px;
+    padding-left: 12px;
 }
+
+.questionnaireSubmit{
+    width: 135px;
+    height: 36px;
+    background-color:#00B2FF;
+    border:#000 1px solid;
+    border-radius:5px;
+    outline:none;
+    font-size: 25px;
+    margin-top: 10px;
+}
+
+
 
 .font-25{
     font-size: 25px;
 }
 .font-50{
     font-size: 50px;
+}
+
+.questionnaireSubmit:hover{
+cursor:pointer;
 }
