@@ -3,8 +3,8 @@
 
 <head>
     <meta name="viewport" content="width=device-width">
-    <title>SkillerBot | Questionnaire</title>
 
+    <title>SkillerBot | Success</title>
     <!-- CSS -->
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/libs/animate.css" />
@@ -13,7 +13,6 @@
 
     <!-- JS -->
     <script src="/js/main.js" type="text/javascript"></script>
-
 </head>
 
 <body class="profile-body">
@@ -21,38 +20,51 @@
         <div class="header">
             <!-- <h3 class="logo"></h3> -->
             <img src="/assets/img/SkillerBot_Logo.png" alt="Skiller Bot" class="logo" />
-            <div class="hamburger" id="menuButton" onmouseover="shrinkMenu()" onmouseout="expandMenu()" onclick="openMenu();">
+            <div class="hamburger" id="menuButton1" onmouseover="shrinkMenu()" onmouseout="expandMenu()" onclick="openMenu();">
                 <span id="line1"></span>
                 <span id="line2" class=""></span>
                 <span id="line3"></span>
             </div>
         </div>
 
-        <h1 class="profile-name font-25">
-            <strong>Last Step - </strong> Feed the answers & bring the BOT to life : </h1>
-        <form class="questionnaireSection" style="margin-left: 50px" action="/profile/Accounts?id=<%= userid  %>" onsubmit="return saveUserData()"
-            method="post">
-            <% for ( var key in questions) {%>
-                <label for="userResponse" class="font-18">
-                    <%=questions[key] %>
-                </label>
+        <div>
+            <h1 class="profile-name font-25">
+                <strong> Congratulation!,</strong>
                 <br />
-                <input type="text" name="userResponse" id="<%=key %>" class="userInputDetails" placeholder="Please Enter here ..." required
-                />
-                <br />
-                <% }; %>
-                    <div class="align-center">
-                        <button type="submit" class="qbutton">SAVE
-                            <i class="fa fa-chevron-right"></i>
-                        </button>
-                    </div>
-        </form>
+                <span>Your Bot is alive now</span>
+            </h1>
+        </div>
 
-        <div style="background: #fff; width:100%;">
+        <div>
+            <h1 class="profile-name font-25">
+                <strong> Please Make a note of your Resume/CV Bot URL!, </strong>
+            </h1>
+        </div>
+        <div>
+            <h1 class="profile-name">
+                <img src="/assets/img/success.gif" style="height:100px; width:100px;" />
+            </h1>
+        </div>
+        <div>
+                <h1 class="profile-name font-25">
+                        <i class="fa fa-android"></i>  <a href="/bot/<%=url %>" target="_blank"> http://skillerbot.com/bot/<%=url %></a>
+                </h1>
+            </div>
+
+
+        <a href="/bot/<%=url %>" target="_blank">
+            <div class="align-center">
+                <button type="submit" style="left: calc(50% - 130px);" class="qbutton">PROCEED TO BOT
+                    <i class="fa fa-chevron-right"></i>
+                </button>
+            </div>
+        </a>
+
+        <div>
             <h1 class="slide-indicator font-18" style="text-align:center">
+                <i class="fa fa-circle "></i>
                 <i class="fa fa-circle"></i>
                 <i class="fa fa-circle active"></i>
-                <i class="fa fa-circle"></i>
             </h1>
         </div>
 

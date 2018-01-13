@@ -123,14 +123,23 @@ route.post('/profile/Accounts', (req, res) => {
                                 }).save();  
                             }
 
-                            userProfile.findOneAndUpdate({ '_id': req.query.id }, { 'account_status': true }, (err, doc) => {
+                                var text = "";
+                                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                                for (var i = 0; i < 8; i++)
+                                  text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+                            userProfile.findOneAndUpdate({ '_id': req.query.id }, { 'account_status': true, 'url_code': text }, (err, doc) => {
                                 if (err) {
                                     res.send("Not able to update the database");
+                                    return;
                                 }
+                                res.render("../view/success", {
+                                    url: text,
+                                    userid: req.query.id
+                                });
                             });
 
                         });
-                        res.send("Success");
                     }
                     else {
                         res.send("Data not present in database");
