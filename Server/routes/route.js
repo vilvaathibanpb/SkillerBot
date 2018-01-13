@@ -15,13 +15,13 @@ route.get('/auth/google', auth.googleplusScope);
 route.get('/auth/linkedin', auth.linkedinScope);
 
 //Facebook Profile Authentication
-route.get('/auth/facebook/redirect', passport.authenticate('facebook'),auth.facebookAuth);
+route.get('/auth/facebook/redirect', passport.authenticate('facebook',{failureRedirect: '/auth/facebook'}),auth.facebookAuth);
 
 //Google Profile Authentication
-route.get('/auth/google/redirect', passport.authenticate('google'), auth.googleplusAuth);
+route.get('/auth/google/redirect', passport.authenticate('google',{failureRedirect: '/auth/google'}), auth.googleplusAuth);
 
 //LinkedIn Profile Authentication
-route.get('/auth/linkedin/redirect', passport.authenticate('linkedin'), auth.linkedInAuth);
+route.get('/auth/linkedin/redirect', passport.authenticate('linkedin',{failureRedirect: '/auth/linkedin'}), auth.linkedInAuth);
 
 //Login Page
 route.get('/signup', login.loginPage);
