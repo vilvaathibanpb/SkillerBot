@@ -38,24 +38,40 @@ var addHrMsg = function(){
                 })
                 .then(function(response){ return response.json(); })
                 .then(function(output){ 
-                    console.log(output.answer) 
-                    var div1 = document.createElement("div");
-                    div1.innerHTML = '<div style="background: #fff; display:flex; ">' +
-                                '<img src='+ image + ' class="mini-dp" />' +
-                                '<h4 class="chat-bubble bot" style="font-weight: 400;"> '+ output.answer  + ' </h4>' +
-                        '</div>'
-                    typing.classList.remove("display-flex");
-                    typing.classList.add("display-none-type");
-                    msg.appendChild(div1);
-                    var bot = document.getElementsByClassName('bot');
-                    var element1 = bot[bot.length-1]; 
-                    var topPos1 = element1.offsetTop;
-                    document.getElementById('chatbox').scrollTop = topPos1-10;
-                    return;
+                    if(output.answer){
+                        var div1 = document.createElement("div");
+                        div1.innerHTML = '<div style="background: #fff; display:flex; ">' +
+                                    '<img src='+ image + ' class="mini-dp" />' +
+                                    '<h4 class="chat-bubble bot" style="font-weight: 400;"> '+ output.answer  + ' </h4>' +
+                            '</div>'
+                        typing.classList.remove("display-flex");
+                        typing.classList.add("display-none-type");
+                        msg.appendChild(div1);
+                        var bot = document.getElementsByClassName('bot');
+                        var element1 = bot[bot.length-1]; 
+                        var topPos1 = element1.offsetTop;
+                        document.getElementById('chatbox').scrollTop = topPos1-10;
+                        return;
+                    }else{
+                        typing.classList.remove("display-flex");
+                        typing.classList.add("display-none-type");
+                        var div1 = document.createElement("div");
+                        div1.innerHTML = '<div style="background: #fff; display:flex; ">' +
+                                    '<img src='+ image + ' class="mini-dp" />' +
+                                    '<h4 class="chat-bubble bot" style="font-weight: 400;">I am still learning. Please ask a better question</h4>' +
+                            '</div>'
+                        msg.appendChild(div1);
+                        var bot = document.getElementsByClassName('bot');
+                        var element1 = bot[bot.length-1]; 
+                        var topPos1 = element1.offsetTop;
+                        document.getElementById('chatbox').scrollTop = topPos1-10;
+                        return;
+                    }
                 });
 
             }else{
-                console.log("I am still learning. Please ask a better question");
+                typing.classList.remove("display-flex");
+                typing.classList.add("display-none-type");
                 var div1 = document.createElement("div");
                 div1.innerHTML = '<div style="background: #fff; display:flex; ">' +
                             '<img src='+ image + ' class="mini-dp" />' +
