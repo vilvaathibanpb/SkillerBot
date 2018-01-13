@@ -537,7 +537,17 @@ a{
 /* Profile Page  */
 
 .profile-body{
-background-color:#ADDFEC;
+background-color:#A4B3C2;
+}
+
+.inner-box{
+    margin: 100px;
+    background: #f7f7f7;
+    -webkit-box-shadow: 0 30px 25px 5px #777;
+    -moz-box-shadow: 0 30px 25px 5px #777;
+    box-shadow: 0 30px 25px 5px #777;
+    height: calc(100% - 200px);
+    min-height: calc(100vh - 200px);
 }
 .app-overview{
 position:relative;
@@ -569,6 +579,17 @@ text-align:center;
 .profile-name{
 margin:auto;
 text-align:center;
+padding-top: 50px;
+}
+
+.profile-name span{
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.profile-name strong{
+    font-weight: 400;
 }
 
 .select-option{
@@ -594,6 +615,8 @@ border:#000 1px solid;
 border-radius:5px;
 outline:none;
 }
+
+/* 438CF3 */
 
 .profile-page-submit:hover{
 cursor:pointer;
@@ -626,6 +649,15 @@ cursor:pointer;
     outline:none;
     font-size: 25px;
     margin-top: 10px;
+}
+
+
+
+.font-25{
+    font-size: 25px;
+}
+.font-50{
+    font-size: 50px;
 }
 
 .questionnaireSubmit:hover{
