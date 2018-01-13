@@ -2,6 +2,8 @@
 <html>
 
 <head>
+        <meta name="viewport" content="width=device-width">     
+        
     <title>SkillerBot | Profile</title>
     <!-- CSS -->
     <link rel="stylesheet" href="/css/style.css" />
@@ -31,19 +33,24 @@
             </h1>
         </div>
 
-        <form action="/profile/updatedetails?id=<%= userid  %>" onsubmit="return validate()" method="post">
+        <form action="/profile/updatedetails?id=<%= userid  %>" method="post">
             <div class="select-option">
-                <select class="select-role" id="role" name="selectRole">
-                    <option value="">Please Select your role</option>
-                    <option value="Fresher">Fresher</option>
-                    <option value="Front-End developer">Front-End developer</option>
-                </select>
+                <input type="radio" id="role1" name="selectRole" value="Fresher" required> <label for="role1">Fresher</label><br>
+                <input type="radio" id="role2" name="selectRole" value="Front-End developer"><label for="role2">Front-End developer </label><br>
             </div>
 
             <div class="align-center">
-                <button class="profile-page-submit">NEXT <i class="fa fa-chevron-right"></i></button>
+                <button type="submit" class="profile-page-submit">NEXT <i class="fa fa-chevron-right"></i></button>
             </div>
         </form>
+
+        <div>
+            <h1 class="slide-indicator font-18" style="text-align:center">
+               <i class="fa fa-circle active" ></i>
+               <i class="fa fa-circle"></i>
+               <i class="fa fa-circle"></i>
+            </h1>
+        </div>
 
         <section id="menu" class="menu-section margin-top-10vh display-none">
             <h1 class="menu-close" onclick="closeMenu()">X</h1>
