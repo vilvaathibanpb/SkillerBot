@@ -40,38 +40,39 @@ route.get('/auth/linkedin/profile', auth.profile);
 
 route.post('/profile/updatedetails', (req, res) => {
     userProfile.findOneAndUpdate({ '_id': req.query.id }, { 'role': req.body.selectRole }, (err, doc) => {
-        if (!err) {
-            console.log("Successfully updated");
+        if (err) {
+            res.send("Not able to update the database");
         }
     });
 
     var questions = [];
 
     var intentCollection = "";
-    var questionCollection = "";
 
     switch (req.body.selectRole) {
         case "Fresher":
             intentCollection = fresherQuestion;
-            questionCollection = fresherProfile;
             break;
         case "Front-End developer":
-            intentCollection = userProfile; // Need to change for FE developer
-            questionCollection = userProfile; // Need to change for FE developer
             break;
         default:
             break;
     }
-    intentCollection.findOne({}, function (err, docs) {
-        if (!err) {
-            for (var key_val in docs.questions_Array[0]) {
-                questions.push(docs.questions_Array[0][key_val]);
+    if (intentCollection.length > 0) {
+        intentCollection.findOne({}, function (err, docs) {
+            if (!err) {
+                for (var key_val in docs.questions_Array[0]) {
+                    questions.push(docs.questions_Array[0][key_val]);
+                }
+                res.render("../view/questionnaire", {
+                    questions: questions
+                });
             }
-            res.render("../view/questionnaire", {
-                questions: questions
-            });
-        }
-    });
+            else{
+                res.send("Data not present in database");
+            }
+        });
+    }
 });
 
 module.exports = route;

@@ -598,3 +598,18 @@ outline:none;
 .profile-page-submit:hover{
 cursor:pointer;
 }
+
+
+/* Questionnaire page */
+
+.questionnaireSection{
+    margin: 10% 0% 0% 50px;
+    font-size: 32px;
+    position:relative;
+}
+
+.userInputDetails{
+    width: 70%;
+    height: 25px;
+
+}

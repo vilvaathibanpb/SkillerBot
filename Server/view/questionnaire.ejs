@@ -26,14 +26,12 @@
         </div>
     </div>
 
-    <div>
-        <h1><% questions.forEach(function(question){%>
-        
-        <%=question %>
-
-        <input type="text"></input><br></br>
-        <% }); %></h1>
-    </div>
+    <form class="questionnaireSection" action="#" onsubmit="return saveUserData()" method="get" >
+        <div class="userInputLabel"> <% questions.forEach(function(question){%>
+            <%=question %><br></div>
+            <input type="text" class="userInputDetails" placeholder="Your Name ..." required><br>
+        <% }); %>
+    </form>
 
         <!-- <section id="menu" class="menu-section margin-top-10vh display-none">
             <h1 class="menu-close" onclick="closeMenu()">X</h1>
