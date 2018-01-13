@@ -28,21 +28,23 @@
             </div>
         </div>
 
-        <h1 class="profile-name font-25"><strong>Last Step - </strong> Feed the answers & bring the BOT to life : </h1>
-
+        <h1 class="profile-name font-25">
+            <strong>Last Step - </strong> Feed the answers & bring the BOT to life : </h1>
         <form class="questionnaireSection" style="margin-left: 50px" action="/profile/Accounts?id=<%= userid  %>" onsubmit="return saveUserData()"
             method="post">
-            <% questions.forEach(function(question){%>
+            <% for ( var key in questions) {%>
                 <label for="userResponse" class="font-18">
-                    <%=question %>
+                    <%=questions[key] %>
                 </label>
                 <br />
-                <input type="text" name="userResponse" class="userInputDetails" placeholder="Please Enter here ..." required />
+                <input type="text" name="userResponse" id="<%=key %>" class="userInputDetails" placeholder="Please Enter here ..." required
+                />
                 <br />
                 <% }); %>
-
-                <div class="align-center">
-                        <button type="submit" class="qbutton">SAVE <i class="fa fa-chevron-right"></i></button>
+                    <div class="align-center">
+                        <button type="submit" class="qbutton">SAVE
+                            <i class="fa fa-chevron-right"></i>
+                        </button>
                     </div>
         </form>
 

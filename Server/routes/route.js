@@ -63,12 +63,13 @@ route.post('/profile/updatedetails', (req, res) => {
         intentCollection.findOne({}, function (err, docs) {
             if (!err) {
                 for (var key_val in docs.questions_Array[0]) {
-                    questions.push(docs.questions_Array[0][key_val]);
+                    questions = docs.questions_Array[0];
                 }
                 res.render("../view/questionnaire", {
                     questions: questions,
                     userid: req.query.id
                 });
+                console.log("Questions:",questions)
             }
             else {
                 res.send("Data not present in database");
@@ -81,7 +82,7 @@ route.post('/profile/updatedetails', (req, res) => {
 route.post('/profile/Accounts', (req, res) => {
     var userRole = "";
     var intentCollection = "";
-    var finalArray = [];
+    var responseObject = {};
 
     userProfile.findOne({ '_id': req.query.id }, (err, user) => {
         if (!err) {
@@ -103,22 +104,23 @@ route.post('/profile/Accounts', (req, res) => {
                         //Array of response from user from Questionnaire page
                         var userResponse = req.body.userResponse;
                         for (var key_val in docs.questions_Array[0]) {
-                            finalArray[key_val] = userResponse[counter];
+                            responseObject[key_val] = userResponse[counter];
                             counter = counter + 1 ;
                         }
-                        console.log(finalArray);
+
                         fresherProfile.findOne({ user_id: req.query.id }).then((currentUser) => {
+                            var responseObject_arr = [];
+                            responseObject_arr.push(responseObject);
                             if (currentUser) {
-                                currentUser.questions_Array.push(finalArray);
+                                currentUser.questions_Array = responseObject;
                                 currentUser.save();
-                                console.log("******",currentUser.questions_Array);
                             }
-                            else {
-                                new fresherProfile({
+                            else {                               
+                               console.log(responseObject_arr);
+                               new fresherProfile({
                                     user_id: req.query.id,
-                                    questions_Array: finalArray
-                                }).save();
-                                console.log("******",finalArray);
+                                    questions_Array :responseObject_arr 
+                                }).save();  
                             }
 
                             userProfile.findOneAndUpdate({ '_id': req.query.id }, { 'account_status': true }, (err, doc) => {
