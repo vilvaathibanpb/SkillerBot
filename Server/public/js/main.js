@@ -89,8 +89,8 @@ var closeMenu = function(){
 var validate = function() {
 
     var selectList = document.getElementById("role");
-
     var roleIndex = selectList.selectedIndex;
+
     var roleString = "";
     if (parseInt(roleIndex) > 0) {
         roleString = selectList.options[selectList.selectedIndex].text;

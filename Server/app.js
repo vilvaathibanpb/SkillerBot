@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const keys = require("./config/keys");
 const route = require("./routes/route");
 const path = require("path");
+const bodyParser = require("body-parser");
 const passport = require("passport");
 const passportSetup = require('./config/passport-setup');
 
@@ -12,6 +13,8 @@ const port = 3000;
 app.set("view engine","ejs");
 
 app.use(express.static(__dirname + '/public'));
+
+app.use(bodyParser.urlencoded({extended: false}));
 
 //Initialize passport
 app.use(passport.initialize());
