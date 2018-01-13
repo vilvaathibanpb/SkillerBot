@@ -63,12 +63,13 @@ route.post('/profile/updatedetails', (req, res) => {
         intentCollection.findOne({}, function (err, docs) {
             if (!err) {
                 for (var key_val in docs.questions_Array[0]) {
-                    questions.push(docs.questions_Array[0][key_val]);
+                    questions = docs.questions_Array[0];
                 }
                 res.render("../view/questionnaire", {
                     questions: questions,
                     userid: req.query.id
                 });
+                console.log("Questions:",questions)
             }
             else {
                 res.send("Data not present in database");

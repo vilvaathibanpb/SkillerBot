@@ -101,3 +101,12 @@ var validate = function() {
         return false;
     }
 }
+
+var validateUserResponse = function(){
+    var dobValue;
+    if (document.getElementById("BasicQuestion_DOB"))
+        {
+            dobValue = document.getElementById("BasicQuestion_DOB").value;
+            // var pattern = /^([0-9]{2})/([0-9]{2})/([0-9]{4})$/
+        }
+}

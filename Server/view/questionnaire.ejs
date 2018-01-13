@@ -27,12 +27,11 @@
         </div>
     </div>
 
-    <form class="questionnaireSection" action="/profile/Accounts?id=<%= userid  %>" onsubmit="return saveUserData()" method="post" >
-        <div class="userInputLabel"> <% questions.forEach(function(question){%>
-            <%=question %><br></div>
-            
-            <input type="text" name="userResponse" class="userInputDetails" placeholder="Please Enter here ..." required><br>
-        <% }); %>
+    <form class="questionnaireSection" action="/profile/Accounts?id=<%= userid  %>" onsubmit="return validateUserResponse()" method="post" >
+        <div class="userInputLabel"> <% for ( var key in questions) {%>
+            <%=questions[key] %><br></div>
+            <input type="text" name="userResponse" id="<%=key %>" class="userInputDetails" placeholder="Please Enter here ..." required><br>
+        <% } %>
             <div>
                 <button class="questionnaireSubmit">Submit</button> 
             </div>
