@@ -3,12 +3,14 @@ const Schema = mongoose.Schema;
 
 var fresherDetailsSchema = new Schema(
     {
-        user_id : String,
+        user_id : {
+            type: String
+        },
         questions_Array : {
             type:Array
         }
     });
 
-var fresherProfile = mongoose.model("fresherProfile",fresherDetailsSchema);
+var fresherDetail = mongoose.model("fresherDetail",fresherDetailsSchema);
 
-module.exports = fresherProfile;
+module.exports = fresherDetail;

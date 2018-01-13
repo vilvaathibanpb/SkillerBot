@@ -1,6 +1,7 @@
 var addHrMsg = function(){
     var msg = document.getElementById("msgarea");
     var input = document.getElementById("input");
+    var userId = document.getElementById("user-id").innerHTML;
     if(input.value.length > 0 && input.value.trim() != ""){
         var div = document.createElement("div");
         div.innerHTML = '<div style="background: #fff; display:flex; justify-content:flex-end ">' +
@@ -11,7 +12,34 @@ var addHrMsg = function(){
         var element = hrs[hrs.length-1]; 
         var topPos = element.offsetTop;
         document.getElementById('chatbox').scrollTop = topPos-10;
-        input.value = "";
+        // var data = { "query" : input.value };
+        fetch("/findIntent?q=" + input.value,
+        {
+            method: 'GET'
+        })
+        .then(function(response){ return response.json(); })
+        .then(function(intent){ 
+            if(intent.error){
+                console.log(intent.error); 
+                return;               
+            }
+            if(intent.intent){
+                console.log(intent.intent);
+                fetch("/findAnswer?q=" + intent.intent + "&user_id=" + userId,
+                {
+                    method: 'GET'
+                })
+                .then(function(response){ return response.json(); })
+                .then(function(output){ console.log(output.answer) });
+
+            }else{
+                console.log("I am still learning. Please ask a better question");
+            }
+            input.value = "";            
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
     }
 }
 

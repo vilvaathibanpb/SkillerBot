@@ -2,6 +2,7 @@ const express = require("express");
 const route = express.Router();
 const auth = require("../controller/auth");
 const login = require("../controller/login");
+const chat = require("../controller/chat");
 const passport = require("passport");
 const userProfile = require('../models/user-model');
 const fresherQuestion = require('../models/fresher-Questions');
@@ -12,10 +13,9 @@ route.get('/', (req, res) => {
     res.render("../view/index");
 });
 
-route.get('/bot/:code', (req, res) => {
-    console.log(req.params);
-    res.render("../view/chat", { "code": req.params.code });
-});
+route.get('/bot/:code', chat.startChat);
+route.get('/findIntent', chat.chatIntent);
+route.get('/findAnswer', chat.chatResponse);
 
 //Scope APIs
 route.get('/auth/facebook', auth.facebookScope);

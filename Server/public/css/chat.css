@@ -118,8 +118,7 @@ body{
     height: 150px;
     width: 150px;
     border-radius: 50%;
-    margin-top: 150px;
-    /* margin-left: calc(50% - 75px); */
+    margin-top: 20vh;
 }
 
 .send-btn{
