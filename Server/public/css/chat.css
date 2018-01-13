@@ -1,7 +1,12 @@
 body{
     margin: 0;
 }
-
+.display-none-type{
+    display: none!important;
+}
+.display-flex{
+    display: flex;
+}
 .container{
     display: flex;
     height: 100%;
