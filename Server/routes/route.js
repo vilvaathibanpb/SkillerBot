@@ -38,11 +38,10 @@ route.get('/auth/google/profile', auth.profile);
 route.get('/auth/facebook/profile', auth.profile);
 route.get('/auth/linkedin/profile', auth.profile);
 
+//Update Profile Details API
 route.post('/profile/updatedetails', (req, res) => {
-    userProfile.findOneAndUpdate({ '_id': req.query.id }, { 'role': req.body.selectRole }, (err, doc) => {
-        if (err) {
-            res.send("Not able to update the database");
-        }
+    userProfile.findOneAndUpdate({ '_id': req.query.id }, { 'role': req.body.selectRole }).catch((err) => {
+        res.render("../view/signup");
     });
 
     var questions = [];
@@ -60,24 +59,17 @@ route.post('/profile/updatedetails', (req, res) => {
             break;
     }
     if (intentCollection.length > 0) {
-        intentCollection.findOne({}, function (err, docs) {
-            if (!err) {
-                for (var key_val in docs.questions_Array[0]) {
-                    questions = docs.questions_Array[0];
-                }
-                res.render("../view/questionnaire", {
-                    questions: questions,
-                    userid: req.query.id
-                });
-                console.log("Questions:",questions)
+        intentCollection.findOne({}).then((docs) => {
+            for (var key_val in docs.questions_Array[0]) {
+                questions = docs.questions_Array[0];
             }
-            else {
-                res.send("Data not present in database");
-            }
-        });
+            res.render("../view/questionnaire", {
+                questions: questions,
+                userid: req.query.id
+            });
+        })
     }
 });
-
 
 route.post('/profile/Accounts', (req, res) => {
     var userRole = "";
@@ -100,12 +92,12 @@ route.post('/profile/Accounts', (req, res) => {
             if (intentCollection.length > 0) {
                 intentCollection.findOne({}, function (err, docs) {
                     if (!err) {
-                        var counter = 0 ;
+                        var counter = 0;
                         //Array of response from user from Questionnaire page
                         var userResponse = req.body.userResponse;
                         for (var key_val in docs.questions_Array[0]) {
                             responseObject[key_val] = userResponse[counter];
-                            counter = counter + 1 ;
+                            counter = counter + 1;
                         }
 
                         fresherProfile.findOne({ user_id: req.query.id }).then((currentUser) => {
@@ -115,22 +107,20 @@ route.post('/profile/Accounts', (req, res) => {
                                 currentUser.questions_Array = responseObject;
                                 currentUser.save();
                             }
-                            else {                               
-                               console.log(responseObject_arr);
-                               new fresherProfile({
+                            else {
+                                new fresherProfile({
                                     user_id: req.query.id,
-                                    questions_Array :responseObject_arr 
-                                }).save();  
+                                    questions_Array: responseObject_arr
+                                }).save();
                             }
-
-                                var text = "";
-                                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-                                for (var i = 0; i < 8; i++)
-                                  text += possible.charAt(Math.floor(Math.random() * possible.length));
+                            var text = "";
+                            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                            for (var i = 0; i < 8; i++)
+                                text += possible.charAt(Math.floor(Math.random() * possible.length));
 
                             userProfile.findOneAndUpdate({ '_id': req.query.id }, { 'account_status': true, 'url_code': text }, (err, doc) => {
                                 if (err) {
-                                    res.send("Not able to update the database");
+                                    res.render("../view/signup");
                                     return;
                                 }
                                 res.render("../view/success", {
@@ -138,14 +128,13 @@ route.post('/profile/Accounts', (req, res) => {
                                     userid: req.query.id
                                 });
                             });
-
                         });
-                    }
-                    else {
-                        res.send("Data not present in database");
                     }
                 });
             }
+        }
+        else{
+            res.render("../view/signup");
         }
     });
 });

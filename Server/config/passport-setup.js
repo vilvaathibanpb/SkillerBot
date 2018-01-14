@@ -58,7 +58,6 @@ passport.use(
         clientSecret: keys.google.clientSecret
     },
         (accessToken, refreshToken, profile, done) => {
-            console.log("**********Authentication");
             userProfile.findOne({ email_id: profile.emails[0].value }).then((currentUser) => {
                 if (currentUser) {
                     done(null, currentUser);
@@ -67,10 +66,8 @@ passport.use(
                     new userProfile({
                         user_name: profile.displayName,
                         email_id: profile.emails[0].value,
-                        //mobile : String,
                         image_path: profile.photos[0].value,
                         account_status: false,
-                        // url_code : String,
                         role : "undefined",
                         profile_url: profile._json.url
 
