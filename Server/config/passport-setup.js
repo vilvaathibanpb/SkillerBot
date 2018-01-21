@@ -36,13 +36,10 @@ passport.use(
                     new userProfile({
                         user_name: profile.displayName,
                         email_id: profile.emails[0].value,
-                        //mobile : String,
                         image_path: profile.photos[0].value,
                         account_status: false,
+                        role : "undefined",
                         profile_url: profile._json.url
-                        // url_code : String,
-                        // role : String
-
                     }).save().then((newUser) => {
                         done(null, newUser);
                     });
