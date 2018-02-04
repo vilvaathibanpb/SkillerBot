@@ -71,7 +71,7 @@ route.post('/profile/updatedetails', (req, res) => {
     }
 });
 
-route.post('/profile/Accounts', (req, res) => {
+route.post('/profile/accounts', (req, res) => {
     var userRole = "";
     var intentCollection = "";
     var responseObject = {};

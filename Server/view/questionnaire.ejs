@@ -30,7 +30,7 @@
 
         <h1 class="profile-name font-25">
             <strong>Last Step - </strong> Feed the answers & bring the BOT to life : </h1>
-        <form class="questionnaireSection" style="margin-left: 50px" action="/profile/Accounts?id=<%= userid  %>" onsubmit="return saveUserData()"
+        <form class="questionnaireSection" style="margin-left: 50px" action="/profile/accounts?id=<%= userid  %>" onsubmit="return saveUserData()"
             method="post">
             <% for ( var key in questions) {%>
                 <label for="userResponse" class="font-18">
@@ -58,7 +58,7 @@
 
         <section id="menu" class="menu-section margin-top-10vh display-none">
             <h1 class="menu-close" onclick="closeMenu()">X</h1>
-            <a href="http://localhost:3000/signup">
+            <a href="/signup">
                 <h3 class="font-40 animated fadeInUp">Login</h3>
             </a>
             <h3 class="font-40 animated fadeInUp"></h3>
