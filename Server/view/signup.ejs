@@ -15,14 +15,7 @@
 
 <body class="signup-body">
 
-    <div class="header" style="background:#fff">
-        <img src="/assets/img/SkillerBot_Logo.png" alt="Skiller Bot" class="logo" />
-        <div class="hamburger" id="menuButton" onmouseover="shrinkMenu()" onmouseout="expandMenu()" onclick="openMenu();">
-            <span id="line1"></span>
-            <span id="line2" class=""></span>
-            <span id="line3"></span>
-        </div>
-    </div>
+    <%- include header.ejs %>
 
     <h3 id="header-signin">SIGN IN USING</h3>
     <div class="signup-section">
@@ -59,3 +52,4 @@
 </body>
 
 </html>
+<%- include footer.ejs %>

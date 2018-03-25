@@ -20,7 +20,7 @@ a{
     left: 0;
     height: 90px;
     width: 100%;
-    background: transparent;
+    background-color: #00ceb6;
     display: flex;
     justify-content: space-between;
     z-index: 999;
@@ -142,7 +142,7 @@ a{
 }
 .signup-content{
     z-index: 99;
-    padding-top: 40%;
+    padding-top: 30%;
     padding-left: 50px;
     position: relative;
 }
@@ -170,7 +170,7 @@ a{
 }
 .customize-content{
     z-index: 99;
-    padding-top: 40%;
+    padding-top: 30%;
     padding-left: 50px;
     position: relative;
     overflow: hidden;
@@ -210,7 +210,7 @@ a{
 
 .social{
     padding: 15px;
-    width: 35px;
+    width: 70px;
     text-align: center;
     font-size: 25px;
     border: 1px solid #000;
@@ -589,6 +589,7 @@ text-align:center;
 margin:auto;
 text-align:center;
 padding-top: 50px;
+
 }
 
 .profile-name span{

@@ -13,6 +13,17 @@ route.get('/', (req, res) => {
     res.render("../view/index");
 });
 
+route.get('/view/success', (req, res) => {
+    if(req.query.uid && req.query.url){
+        res.render("../view/success",{
+            url: req.query.url,
+            userid: req.query.id
+        });
+    }else{
+        res.render("../view/signup");
+    }
+});
+
 route.get('/bot/:code', chat.startChat);
 route.get('/findIntent', chat.chatIntent);
 route.get('/findAnswer', chat.chatResponse);
@@ -38,105 +49,103 @@ route.get('/auth/google/profile', auth.profile);
 route.get('/auth/facebook/profile', auth.profile);
 route.get('/auth/linkedin/profile', auth.profile);
 
-//Update Profile Details API
-route.post('/profile/updatedetails', (req, res) => {
-    userProfile.findOneAndUpdate({ '_id': req.query.id }, { 'role': req.body.selectRole }).catch((err) => {
-        res.render("../view/signup");
-    });
 
-    var questions = [];
-    var userid;
-
-    var intentCollection = "";
-
-    switch (req.body.selectRole) {
-        case "Fresher":
-            intentCollection = fresherQuestion;
-            break;
-        case "Front-End developer":
-            break;
-        default:
-            break;
-    }
-    if (intentCollection.length > 0) {
-        intentCollection.findOne({}).then((docs) => {
-            for (var key_val in docs.questions_Array[0]) {
-                questions = docs.questions_Array[0];
-            }
-            res.render("../view/questionnaire", {
-                questions: questions,
-                userid: req.query.id
+//Get Questions
+route.post('/profile/getQuestions', (req, res) => {
+    var questions = [],userResponse=[],userid,intentCollection,submitted_status,responseObject = {};
+        if(req.body.Role && typeof(req.body.is_submitted)!== "undefined"){
+            submitted_status=req.body.is_submitted;
+        }else{
+            res.status(404).send('Invalid Request');    
+        }
+        
+        if(!submitted_status==="false" && !submitted_status==="true"){
+            res.status(404).send('Invalid Request');
+        }
+        
+        switch (req.body.Role) {
+            case "fresher":
+                intentCollection = fresherQuestion;
+                break;
+            case "Front-End developer":
+                break;
+            default:
+                break;
+        }
+        if(submitted_status==="false"){
+            userProfile.findOneAndUpdate({ '_id': req.body.id }, { 'role': req.body.Role }).catch((err) => {
+                res.render("../view/signup");
             });
-        })
-    }
-});
-
-route.post('/profile/accounts', (req, res) => {
-    var userRole = "";
-    var intentCollection = "";
-    var responseObject = {};
-
-    userProfile.findOne({ '_id': req.query.id }, (err, user) => {
-        if (!err) {
-            userRole = user.role;
-            switch (userRole) {
-                case "Fresher":
-                    intentCollection = fresherQuestion;
-                    break;
-                case "Front-End developer":
-                    break;
-                default:
-                    break;
-            }
-
-            if (intentCollection.length > 0) {
-                intentCollection.findOne({}, function (err, docs) {
-                    if (!err) {
-                        var counter = 0;
-                        //Array of response from user from Questionnaire page
-                        var userResponse = req.body.userResponse;
-                        for (var key_val in docs.questions_Array[0]) {
-                            responseObject[key_val] = userResponse[counter];
-                            counter = counter + 1;
-                        }
-
-                        fresherProfile.findOne({ user_id: req.query.id }).then((currentUser) => {
-                            var responseObject_arr = [];
-                            responseObject_arr.push(responseObject);
-                            if (currentUser) {
-                                currentUser.questions_Array = responseObject;
-                                currentUser.save();
-                            }
-                            else {
-                                new fresherProfile({
-                                    user_id: req.query.id,
-                                    questions_Array: responseObject_arr
-                                }).save();
-                            }
-                            var text = "";
-                            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-                            for (var i = 0; i < 8; i++)
-                                text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-                            userProfile.findOneAndUpdate({ '_id': req.query.id }, { 'account_status': true, 'url_code': text }, (err, doc) => {
-                                if (err) {
-                                    res.render("../view/signup");
-                                    return;
-                                }
-                                res.render("../view/success", {
-                                    url: text,
-                                    userid: req.query.id
-                                });
-                            });
-                        });
+            if (typeof(intentCollection)=="function") {
+                intentCollection.findOne({}).then((docs) => {
+                    for (var key_val in docs.questions_Array[0]) {
+                        questions = docs.questions_Array[0];
                     }
-                });
+                    res.json({
+                        questions: questions,
+                        userid: req.body.id
+                    });
+                })
+            }else{
+                res.status(404).send('Not found');
             }
         }
-        else{
-            res.render("../view/signup");
+        
+        if(submitted_status==="true"){
+            userProfile.findOne({ '_id': req.body.id }, (err, user) => {
+                if (!err) {
+                    if (typeof(intentCollection)=="function") {
+                        intentCollection.findOne({}, function (err, docs) {
+                            if (!err) {
+                                var counter = 0;
+                                //Array of response from user from Questionnaire page
+                                userResponse = JSON.parse(req.body.question_response);
+                                for (var key_val in docs.questions_Array[0]) {
+                                    responseObject[key_val] = userResponse[counter];
+                                    counter = counter + 1;
+                                }
+
+                                fresherProfile.findOne({ user_id: req.body.id }).then((currentUser) => {
+                                    var responseObject_arr = [];
+                                    responseObject_arr.push(responseObject);
+                                    if (currentUser) {
+                                        currentUser.questions_Array = responseObject;
+                                        currentUser.save();
+                                    }
+                                    else {
+                                        new fresherProfile({
+                                            user_id: req.body.id,
+                                            questions_Array: responseObject_arr
+                                        }).save();
+                                    }
+                                    var text = "";
+                                    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                                    for (var i = 0; i < 8; i++)
+                                        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+                                    userProfile.findOneAndUpdate({ '_id': req.body.id }, { 'account_status': true, 'url_code': text }, (err, doc) => {
+                                        if (err) {
+                                            res.json({redirect_url:"/view/signup"});
+                                            return;
+                                        }
+                                        res.json({redirect_url:"/view/success",render_data:{
+                                            url: text,
+                                            userid: req.body.id
+                                        }});
+                                    });
+                                });
+                            }
+                        });
+                    }else{
+                        res.status(404).send('Not found');
+                    }
+                }
+                else{
+                    res.json({redirect_url:"../view/signup"});
+                }
+            });
         }
-    });
+
 });
 
 module.exports = route;

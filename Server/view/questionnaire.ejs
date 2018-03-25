@@ -18,15 +18,7 @@
 
 <body class="profile-body">
     <div class="inner-box">
-        <div class="header">
-            <!-- <h3 class="logo"></h3> -->
-            <img src="/assets/img/SkillerBot_Logo.png" alt="Skiller Bot" class="logo" />
-            <div class="hamburger" id="menuButton" onmouseover="shrinkMenu()" onmouseout="expandMenu()" onclick="openMenu();">
-                <span id="line1"></span>
-                <span id="line2" class=""></span>
-                <span id="line3"></span>
-            </div>
-        </div>
+        <%- include header.ejs %>
 
         <h1 class="profile-name font-25">
             <strong>Last Step - </strong> Feed the answers & bring the BOT to life : </h1>
@@ -56,15 +48,8 @@
             </h1>
         </div>
 
-        <section id="menu" class="menu-section margin-top-10vh display-none">
-            <h1 class="menu-close" onclick="closeMenu()">X</h1>
-            <a href="/signup">
-                <h3 class="font-40 animated fadeInUp">Login</h3>
-            </a>
-            <h3 class="font-40 animated fadeInUp"></h3>
-            <h3 class="font-40 animated fadeInUp">About US</h3>
-            <h3 class="font-40 animated fadeInUp">About US</h3>
-        </section>
+        <%- include menu-items.ejs %>
+
     </div>
 </body>
 

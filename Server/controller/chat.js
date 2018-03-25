@@ -17,7 +17,7 @@ exports.startChat = (req, res) => {
         if (!err) {
             res.render("../view/chat", { "data": data });
         } else {
-            res.send("err");
+            res.send(err);
         }
     });
 }

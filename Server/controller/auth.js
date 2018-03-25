@@ -1,5 +1,6 @@
 const passport = require("passport");
 const userProfile = require('../models/user-model');
+const fresherQuestion = require('../models/fresher-Questions');
 
 //Scope page for google +
 exports.googleplusScope = passport.authenticate('google',{
@@ -20,7 +21,7 @@ exports.facebookScope = passport.authenticate('facebook',{
 exports.googleplusAuth = (req, res) => {
     userProfile.findOne({'email_id': req.user.email_id}).then((data)=>{
         if (req.user.account_status){
-            res.send("Existing user");
+            res.redirect("/bot/"+req.user.url_code);
         }
         else{
             res.redirect("/auth/google/profile?_id="+ req.user._id);
@@ -60,13 +61,22 @@ exports.facebookAuth = (req, res) => {
 
 //Profile page route API
 exports.profile = (req, res) => {
-    userProfile.findOne({'_id': req.query._id}).then((data)=>{
-        res.render("../view/profile", {
-                "userName": data.user_name,
-                "profileImage":data.image_path,
-                "userid":data._id
+    let parsedata={};
+    userProfile.findOne({"_id": req.query._id}).then((data)=>{
+        fresherQuestion.findOne({}).then((docs) => {
+            questions=[];
+            for (var key_val in docs.questions_Array[0]) {
+                questions = docs.questions_Array[0];
+            }
+            data['questions']=questions;
+            res.render("../view/profile", {
+                "data": data,
+                "questions" : questions
             });
         }).catch((err)=>{
             res.status(404).redirect('/');
         });
+    }).catch((err)=>{
+        res.status(404).redirect('/');
+    });    
 }

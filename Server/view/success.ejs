@@ -16,42 +16,16 @@
 </head>
 
 <body class="profile-body">
-    <div class="inner-box">
-        <div class="header">
-            <!-- <h3 class="logo"></h3> -->
-            <img src="/assets/img/SkillerBot_Logo.png" alt="Skiller Bot" class="logo" />
-            <div class="hamburger" id="menuButton1" onmouseover="shrinkMenu()" onmouseout="expandMenu()" onclick="openMenu();">
-                <span id="line1"></span>
-                <span id="line2" class=""></span>
-                <span id="line3"></span>
-            </div>
-        </div>
-
-        <div>
-            <h1 class="profile-name font-25">
-                <strong> Congratulation!,</strong>
-                <br />
-                <span>Your Bot is alive now</span>
-            </h1>
-        </div>
-
-        <div>
-            <h1 class="profile-name font-25">
-                <strong> Please Make a note of your Resume/CV Bot URL!, </strong>
-            </h1>
-        </div>
-        <div>
-            <h1 class="profile-name">
-                <img src="/assets/img/success.gif" style="height:100px; width:100px;" />
-            </h1>
-        </div>
-        <div>
-                <h1 class="profile-name font-25">
-                        <i class="fa fa-android"></i>  <a href="/bot/<%=url %>" target="_blank"> http://skillerbot.com/bot/<%=url %></a>
-                </h1>
-            </div>
-
-
+    <%- include header.ejs %>
+    <%- include notifications.ejs %>
+    <section style="margin-top:150px;">
+        <h3 style="text-align:center">Please Make a note of your Resume/CV Bot URL!,</h3>
+        <h1 class="profile-name">
+            <img src="/assets/img/success.gif" style="height:100px; width:100px;" />
+        </h1>
+        <h1 class="profile-name font-25">
+            <i class="fa fa-android"></i>  <a href="/bot/<%=url %>" target="_blank"> http://skillerbot.com/bot/<%=url %></a>
+        </h1>
         <a href="/bot/<%=url %>" target="_blank">
             <div class="align-center">
                 <button type="submit" style="left: calc(50% - 130px);" class="qbutton">PROCEED TO BOT
@@ -59,25 +33,13 @@
                 </button>
             </div>
         </a>
+    </section>
 
-        <div>
-            <h1 class="slide-indicator font-18" style="text-align:center">
-                <i class="fa fa-circle "></i>
-                <i class="fa fa-circle"></i>
-                <i class="fa fa-circle active"></i>
-            </h1>
-        </div>
+    <script>
+        showNotification("static","Congratulation!","Your Bot is Live  Now",0);
+    </script>
 
-        <section id="menu" class="menu-section margin-top-10vh display-none">
-            <h1 class="menu-close" onclick="closeMenu()">X</h1>
-            <a href="/signup">
-                <h3 class="font-40 animated fadeInUp">Login</h3>
-            </a>
-            <h3 class="font-40 animated fadeInUp"></h3>
-            <h3 class="font-40 animated fadeInUp">About US</h3>
-            <h3 class="font-40 animated fadeInUp">About US</h3>
-        </section>
-    </div>
+    <%- include footer.ejs %>
 </body>
 
 </html>
